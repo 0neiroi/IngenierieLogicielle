@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Jeu2048;
+package projet.Jeu2048.model;
 
 import java.util.HashSet;
 import java.util.Random;
@@ -27,6 +27,9 @@ public class Grille implements Parametres {
 
     public int getValeurMax() {
         return valeurMax;
+    }
+    public void setValeurMax(int v){
+        this.valeurMax = v;
     }
     
     public String toString(){

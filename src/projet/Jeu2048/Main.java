@@ -3,12 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Jeu2048;
+package projet.Jeu2048;
 
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Scanner;
+import projet.Jeu2048.model.Case;
+import projet.Jeu2048.model.Grille;
+import projet.Jeu2048.model.Parametres;
 
 /**
  *
@@ -68,7 +71,6 @@ public class Main implements Parametres {
             }
             
         }
-        System.out.println("bite");
         if(maGrille.partieFinie()&&maGrille.getValeurMax()<objectif){
             maGrille.gameOver();
         }else{

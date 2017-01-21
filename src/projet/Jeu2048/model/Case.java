@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Jeu2048;
+package projet.Jeu2048.model;
 
 /**
  *
