@@ -22,10 +22,12 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.HashSet;
 import static javafx.application.ConditionalFeature.FXML;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Text;
 import projet.Jeu2048.Fenetre2048;
 import projet.Jeu2048.model.Case;
 import projet.Jeu2048.model.Parametres;
@@ -42,6 +44,9 @@ public class Grille_de_jeuController implements Initializable {
     
     @FXML
     GridPane myGridPane;
+    
+    @FXML
+    Text score;
     
     @FXML
     Label upBtn;
@@ -66,54 +71,49 @@ public class Grille_de_jeuController implements Initializable {
     
      public void setMainApp(Fenetre2048 mainApp) {
         this.mainApp = mainApp;
-
-        // Add observable list data to the table
-        
-    }
-     
-    @FXML 
-    private void keyButtonAction(KeyEvent event ) {
-        String str = event.getCharacter();
-        HashSet<Case> grilleCopie=new HashSet<>();
-        grilleCopie.addAll(mainApp.getMaGrille().getGrille());
-        switch(str){
-            case "w":
-                    mainApp.getMaGrille().seDeplacer(Parametres.haut);
-                    break;
-            case "s":
-                    mainApp.getMaGrille().seDeplacer(Parametres.bas);
-                    break;
-            case "a":
-                    mainApp.getMaGrille().seDeplacer(Parametres.gauche);
-                    break;
-            case "d":
-                    mainApp.getMaGrille().seDeplacer(Parametres.droite);
-                    break;
-            default:
-                    System.out.println("NOP!");
-                   break;
-                    
-        } 
-        if(!grilleCopie.equals(mainApp.getMaGrille().getGrille())){
-            mainApp.getMaGrille().nouvelleCase();
-        }
-        this.myGridPane.getChildren().removeAll();
         for(int j=0;j>-4;j--){
                 this.myGridPane.add(new Tuile(this.mainApp.getMaGrille().getCase(0,j).getValeur()).tuileDeJeu,0,j*-1);
                 for(int i=1;i<4;i++){
                     this.myGridPane.add(new Tuile(this.mainApp.getMaGrille().getCase(i,j).getValeur()).tuileDeJeu,i,j*-1);
                 }
             }
+
+        // Add observable list data to the table
         
     }
      
-     
-     
     @FXML 
-    private void handleButtonAction(MouseEvent event ) {
-        String str = ((Label)event.getSource()).getId();
+    private void handleButtonAction(Event event ) {
+        String str="";
+        if(event instanceof MouseEvent){
+            str = ((Label)event.getSource()).getId();
+        }else if(event instanceof KeyEvent){
+            str = ((KeyEvent)event).getCharacter();
+            switch(str){
+            case "w":
+                    str="upBtn";
+                    break;
+            case "s":
+                    str="downBtn";
+                    break;
+            case "a":
+                    str="leftBtn";
+                    break;
+            case "d":
+                    str="rightBtn";
+                    break;
+            default:
+                    System.out.println("NOP!");
+                   break;
+                    
+        } 
+            
+        }
         HashSet<Case> grilleCopie=new HashSet<>();
         grilleCopie.addAll(mainApp.getMaGrille().getGrille());
+        
+        
+        
         switch(str){
             case "upBtn":
                     mainApp.getMaGrille().seDeplacer(Parametres.haut);
@@ -139,6 +139,7 @@ public class Grille_de_jeuController implements Initializable {
                     this.myGridPane.add(new Tuile(this.mainApp.getMaGrille().getCase(i,j).getValeur()).tuileDeJeu,i,j*-1);
                 }
             }
+        score.setText(""+mainApp.getMaGrille().getScore());
     }
     
 }

@@ -15,6 +15,9 @@ import java.util.Random;
 public class Grille implements Parametres {
     private HashSet<Case> grille;
     private int valeurMax;
+    private int score=0;
+    
+    
     
     public Grille(){
         this.grille=new HashSet<>();
@@ -30,6 +33,9 @@ public class Grille implements Parametres {
     }
     public void setValeurMax(int v){
         this.valeurMax = v;
+    }
+    public int getScore(){
+        return this.score;
     }
     
     public String toString(){
@@ -200,6 +206,7 @@ public class Grille implements Parametres {
                             this.grille.remove(c);
                             if(c.valeurEgale(c.getVoisinDirect(d))&&!c.getVoisinDirect(d).isFusion()){
                                 c.getVoisinDirect(d).setValeur(c.getVoisinDirect(d).getValeur()*2);
+                                this.score+=c.getVoisinDirect(d).getValeur();
                                 c.getVoisinDirect(d).setFusion(true);
                                 
                                 if(c.getVoisinDirect(d).getValeur()>this.valeurMax){
@@ -234,6 +241,7 @@ public class Grille implements Parametres {
                             
                             if(c.valeurEgale(c.getVoisinDirect(d))&&!c.getVoisinDirect(d).isFusion()){
                                 c.getVoisinDirect(d).setValeur(c.getVoisinDirect(d).getValeur()*2);
+                                this.score+=c.getVoisinDirect(d).getValeur();
                                 c.getVoisinDirect(d).setFusion(true);
                                 if(c.getVoisinDirect(d).getValeur()>this.valeurMax){
                                     this.valeurMax = c.getVoisinDirect(d).getValeur();
@@ -269,6 +277,7 @@ public class Grille implements Parametres {
                             this.grille.remove(c);
                             if(c.valeurEgale(c.getVoisinDirect(d))&&!c.getVoisinDirect(d).isFusion()){
                                 c.getVoisinDirect(d).setValeur(c.getVoisinDirect(d).getValeur()*2);
+                                this.score+=c.getVoisinDirect(d).getValeur();
                                 c.getVoisinDirect(d).setFusion(true);
                                 if(c.getVoisinDirect(d).getValeur()>this.valeurMax){
                                     this.valeurMax = c.getVoisinDirect(d).getValeur();
@@ -299,6 +308,7 @@ public class Grille implements Parametres {
                             this.grille.remove(c);
                             if(c.valeurEgale(c.getVoisinDirect(d))&&!c.getVoisinDirect(d).isFusion()){
                                 c.getVoisinDirect(d).setValeur(c.getVoisinDirect(d).getValeur()*2);
+                                this.score+=c.getVoisinDirect(d).getValeur();
                                 c.getVoisinDirect(d).setFusion(true);
                                 if(c.getVoisinDirect(d).getValeur()>this.valeurMax){
                                     this.valeurMax = c.getVoisinDirect(d).getValeur();

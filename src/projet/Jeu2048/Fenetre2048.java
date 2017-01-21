@@ -63,6 +63,7 @@ public class Fenetre2048 extends Application {
             Scene scene = new Scene(rootLayout);
             primaryStage.setScene(scene);
             primaryStage.show();
+            
         } catch (IOException e) {
             e.printStackTrace();
         }

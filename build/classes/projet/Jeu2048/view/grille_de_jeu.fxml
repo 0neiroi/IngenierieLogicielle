@@ -10,7 +10,7 @@
 <?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" onKeyTyped="#keyButtonAction" prefHeight="417.0" prefWidth="414.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projet.Jeu2048.view.Grille_de_jeuController">
+<AnchorPane id="AnchorPane" onKeyTyped="#handleButtonAction" prefHeight="417.0" prefWidth="414.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projet.Jeu2048.view.Grille_de_jeuController">
     <stylesheets>
         <URL value="@grille_de_jeu.css" />
     </stylesheets>
@@ -176,7 +176,7 @@
                                                    </Label>
                                                 </children>
                                              </GridPane>
-                                             <Text layoutX="164.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="76.27099609375" />
+                                             <Text fx:id="score" layoutX="164.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="76.27099609375" />
                                           </children>
                                        </Pane>
                                     </children>
