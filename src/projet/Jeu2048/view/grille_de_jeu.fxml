@@ -191,7 +191,7 @@
                                              <Insets />
                                           </opaqueInsets>
                                           <graphic>
-                                             <Polygon fill="DODGERBLUE" onKeyTyped="#keyButtonAction" rotate="-90.0" scaleX="0.4" scaleY="0.4" stroke="BLACK" strokeType="INSIDE">
+                                             <Polygon fill="DODGERBLUE" onKeyTyped="#handleButtonAction" rotate="-90.0" scaleX="0.4" scaleY="0.4" stroke="BLACK" strokeType="INSIDE">
                                                <points>
                                                  <Double fx:value="-50.0" />
                                                  <Double fx:value="40.0" />
