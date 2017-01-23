@@ -25,12 +25,14 @@ import static javafx.application.ConditionalFeature.FXML;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import projet.Jeu2048.Fenetre2048;
 import projet.Jeu2048.model.Case;
 import projet.Jeu2048.model.Parametres;
+import static projet.Jeu2048.model.Parametres.*;
 
 /**
  * FXML Controller class
@@ -88,25 +90,34 @@ public class Grille_de_jeuController implements Initializable {
         if(event instanceof MouseEvent){
             str = ((Label)event.getSource()).getId();
         }else if(event instanceof KeyEvent){
-            str = ((KeyEvent)event).getCharacter();
-            switch(str){
-            case "w":
+            //str = ((KeyEvent)event).getCharacter();
+            System.out.println("key event");
+            if(((KeyEvent) event).getCode() == KeyCode.RIGHT){str="upBtn";System.out.println("Hel");
+            }else if(((KeyEvent) event).getCode() == KeyCode.DOWN){str="downBtn";System.out.println("Hell");}
+            else if(((KeyEvent) event).getCode() == KeyCode.LEFT){str="leftBtn";System.out.println("Hello");}
+            else if(((KeyEvent) event).getCode() == KeyCode.RIGHT){str="rightBtn";}else{System.out.println(((KeyEvent) event).getCode());
+            System.out.println(event.getClass().getName());
+            }
+            
+            /*
+            switch(((KeyEvent) event).getCode()){
+            case KeyCode.UP:
                     str="upBtn";
                     break;
-            case "s":
+            case keyCode.DOWN:
                     str="downBtn";
                     break;
-            case "a":
+            case KeyCode.LEFT:
                     str="leftBtn";
                     break;
-            case "d":
+            case KeyCode.RIGHT:
                     str="rightBtn";
                     break;
             default:
                     System.out.println("NOP!");
                    break;
                     
-        } 
+        } */
             
         }
         HashSet<Case> grilleCopie=new HashSet<>();
