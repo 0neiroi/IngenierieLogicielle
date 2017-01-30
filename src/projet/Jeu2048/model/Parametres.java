@@ -15,6 +15,11 @@ public interface Parametres {
     final int gauche=-2;
     final int droite=2;
     
+    final String UP="w";
+    final String DOWN="s";
+    final String LEFT="a";
+    final String RIGHT="d";
+    
     final int taille=4;
     final int objectif=2048;
 }

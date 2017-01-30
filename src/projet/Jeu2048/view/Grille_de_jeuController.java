@@ -5,6 +5,7 @@
  */
 package projet.Jeu2048.view;
 
+import java.awt.im.InputContext;
 import javafx.scene.input.MouseEvent;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -25,12 +26,14 @@ import static javafx.application.ConditionalFeature.FXML;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import projet.Jeu2048.Fenetre2048;
 import projet.Jeu2048.model.Case;
 import projet.Jeu2048.model.Parametres;
+import static projet.Jeu2048.model.Parametres.*;
 
 /**
  * FXML Controller class
@@ -88,8 +91,32 @@ public class Grille_de_jeuController implements Initializable {
         if(event instanceof MouseEvent){
             str = ((Label)event.getSource()).getId();
         }else if(event instanceof KeyEvent){
-            str = ((KeyEvent)event).getCharacter();
-            switch(str){
+            //str = ((KeyEvent)event).getCharacter();
+            InputContext context = InputContext.getInstance(); 
+            System.out.println(context.getLocale().getCountry().toString());
+            
+            if(context.getLocale().getCountry().toString().equals("FR")){
+                switch(((KeyEvent) event).getCharacter()){
+            case "z":
+                    str="upBtn";
+                    break;
+            case "s":
+                    str="downBtn";
+                    break;
+            case "q":
+                    str="leftBtn";
+                    break;
+            case "d":
+                    str="rightBtn";
+                    break;
+            default:
+                    System.out.println("NOP!");
+                   break;
+                    
+        }
+            
+            }else{
+                    switch(((KeyEvent) event).getCharacter()){
             case "w":
                     str="upBtn";
                     break;
@@ -106,7 +133,9 @@ public class Grille_de_jeuController implements Initializable {
                     System.out.println("NOP!");
                    break;
                     
-        } 
+        }
+            }
+            
             
         }
         HashSet<Case> grilleCopie=new HashSet<>();
