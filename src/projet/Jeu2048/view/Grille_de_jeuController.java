@@ -5,6 +5,7 @@
  */
 package projet.Jeu2048.view;
 
+import java.awt.im.InputContext;
 import javafx.scene.input.MouseEvent;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -91,33 +92,50 @@ public class Grille_de_jeuController implements Initializable {
             str = ((Label)event.getSource()).getId();
         }else if(event instanceof KeyEvent){
             //str = ((KeyEvent)event).getCharacter();
-            System.out.println("key event");
-            if(((KeyEvent) event).getCode() == KeyCode.RIGHT){str="upBtn";System.out.println("Hel");
-            }else if(((KeyEvent) event).getCode() == KeyCode.DOWN){str="downBtn";System.out.println("Hell");}
-            else if(((KeyEvent) event).getCode() == KeyCode.LEFT){str="leftBtn";System.out.println("Hello");}
-            else if(((KeyEvent) event).getCode() == KeyCode.RIGHT){str="rightBtn";}else{System.out.println(((KeyEvent) event).getCode());
-            System.out.println(event.getClass().getName());
-            }
+            InputContext context = InputContext.getInstance(); 
+            System.out.println(context.getLocale().getCountry().toString());
             
-            /*
-            switch(((KeyEvent) event).getCode()){
-            case KeyCode.UP:
+            if(context.getLocale().getCountry().toString().equals("FR")){
+                switch(((KeyEvent) event).getCharacter()){
+            case "z":
                     str="upBtn";
                     break;
-            case keyCode.DOWN:
+            case "s":
                     str="downBtn";
                     break;
-            case KeyCode.LEFT:
+            case "q":
                     str="leftBtn";
                     break;
-            case KeyCode.RIGHT:
+            case "d":
                     str="rightBtn";
                     break;
             default:
                     System.out.println("NOP!");
                    break;
                     
-        } */
+        }
+            
+            }else{
+                    switch(((KeyEvent) event).getCharacter()){
+            case "w":
+                    str="upBtn";
+                    break;
+            case "s":
+                    str="downBtn";
+                    break;
+            case "a":
+                    str="leftBtn";
+                    break;
+            case "d":
+                    str="rightBtn";
+                    break;
+            default:
+                    System.out.println("NOP!");
+                   break;
+                    
+        }
+            }
+            
             
         }
         HashSet<Case> grilleCopie=new HashSet<>();
