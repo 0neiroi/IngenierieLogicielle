@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package projet.Jeu2048.view;
-
+// mettre les threads ici ? 
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.OverrunStyle;
