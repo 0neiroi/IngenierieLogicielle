@@ -60,11 +60,29 @@ public class Grille implements Parametres {
         return str;
     }
     
+    public void setValueId(){
+        int k=1;
+        
+        for(int j=0;j>-4;j--){
+                System.out.println(k);
+                System.out.println(this.getCase(0,j).getValeur());
+                if(this.getCase(0,j).getValeur()>0)this.getCase(0,j).setId(k);k+=1;
+                for(int i=1;i<4;i++){
+                    System.out.println(this.getCase(i,j).getValeur());
+                    if(this.getCase(i,j).getValeur()>0)this.getCase(i,j).setId(k);k+=1;
+                    System.out.println(k);
+                }
+                
+            }
+    }
+    
     public void setFusionOff(){
         for(int j=0;j>-4;j--){
                 this.getCase(0,j).setFusion(false);
+                this.getCase(0,j).setId(0);
                 for(int i=1;i<4;i++){
                     this.getCase(i,j).setFusion(false);
+                    this.getCase(i,j).setId(0);
                 }
             }
     }

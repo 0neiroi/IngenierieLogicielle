@@ -161,7 +161,10 @@ public class Grille_de_jeuController implements Initializable {
         if(!grilleCopie.equals(mainApp.getMaGrille().getGrille())){
             mainApp.getMaGrille().nouvelleCase();
         }
+        
+        
         this.myGridPane.getChildren().removeAll();
+        this.mainApp.getMaGrille().setValueId();
         for(int j=0;j>-4;j--){
                 this.myGridPane.add(new Tuile(this.mainApp.getMaGrille().getCase(0,j).getValeur()).tuileDeJeu,0,j*-1);
                 for(int i=1;i<4;i++){

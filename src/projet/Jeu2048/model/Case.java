@@ -20,6 +20,7 @@ public class Case implements Parametres {
     private int valeur;
     private Grille maGrille;
     private boolean fusion;
+    private int id;
     
     public Case(int abscisse,int ordonnee, int maValeur){
         this.x=abscisse;
@@ -34,6 +35,12 @@ public class Case implements Parametres {
 
     public void setX(int x) {
         this.x = x;
+    }
+    public int getId(){
+        return this.id;
+    }
+    public void setId(int i){
+        this.id=i;
     }
 
     public int getY() {
