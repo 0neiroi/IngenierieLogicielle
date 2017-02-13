@@ -93,7 +93,6 @@ public class Grille_de_jeuController implements Initializable {
         }else if(event instanceof KeyEvent){
             //str = ((KeyEvent)event).getCharacter();
             InputContext context = InputContext.getInstance(); 
-            System.out.println(context.getLocale().getCountry().toString());
             
             if(context.getLocale().getCountry().toString().equals("FR")){
                 switch(((KeyEvent) event).getCharacter()){
