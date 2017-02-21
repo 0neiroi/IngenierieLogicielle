@@ -14,7 +14,7 @@ public class Case implements Parametres {
    haut  à  gauche. Une  case  située tout  en  haut  à  gauche aura  pour coordonnées 
    (0;0).L’axe des abscisses va de la gauche vers la droite et la valeur en abscisse va 
    de 0 à 3. L’axe des ordonnées va du haut vers le bas et la valeur en ordonnée 
-   est comprise entre 0 et 3.*/
+   est comprise entre 0 et -3.*/
     private int x;
     private int y;
     private int valeur;
