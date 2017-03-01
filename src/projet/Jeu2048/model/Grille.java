@@ -183,25 +183,8 @@ public class Grille implements Parametres {
                     c.setY(o);
                 }
             }
-        }
-        
-        for(Case c1:grille){
-            for(Case c2:grille){
-                if(c1.egals(c2)){
-                    if(c1.getValeur()<c2.getValeur()){
-                        grille.remove(c1);
-                    }else{
-                        if(c1.getValeur()>c2.getValeur()){
-                            grille.remove(c2);
-                        }
-                        
-                    }
-                }
-            }
-        }
-        
-        
-        return b;
+        }    
+        return b;                                           //On retourne b à la fin.
     }
     
     
@@ -246,51 +229,33 @@ public class Grille implements Parametres {
      */
     public void seDeplacer(int d){
         
-        for(Case c1:grille){
-            for(Case c2:grille){
-                if(c1.egals(c2)){
-                    if(c1.getValeur()<c2.getValeur()){
-                        grille.remove(c1);
-                    }else{
-                        if(c1.getValeur()>c2.getValeur()){
-                            grille.remove(c2);
-                        }
-                    }
-                }
-            }
-        }
-        
-        Case c;
-        switch(d){
+        Case c; //On crée une case vide
+        switch(d){              //Switch des 4 directions possibles : Seul le cas haut sera commenté
             case haut:
-                for(int i=0;i<taille;i++){
-                    for(int j=-1;j>-taille;j--){
-                        if(this.getCase(i, j).getValeur()!=0){
-                            c=this.getCase(i, j);
-                            this.grille.remove(c);
-                            if(c.valeurEgale(c.getVoisinDirect(d))&&!c.getVoisinDirect(d).isFusion()){
-                                c.getVoisinDirect(d).setValeur(c.getVoisinDirect(d).getValeur()*2);
-                                this.score+=c.getVoisinDirect(d).getValeur();
-                                c.getVoisinDirect(d).setFusion(true);
+                for(int i=0;i<taille;i++){                                                              //Pour i allant de 0 à la taille du tableau       
+                    for(int j=-1;j>-taille;j--){                                                            //Pour j allant de -1 à -1 fois la taille du tableau
+                        if(this.getCase(i, j).getValeur()!=0){                                                  //Si la case de coordonnées (i,j) a une valeur différente de 0
+                            c=this.getCase(i, j);                                                                   //c clonne c'est case
+                            this.grille.remove(c);                                                                  //on retire c de la grille
+                            if(c.valeurEgale(c.getVoisinDirect(d))&&!c.getVoisinDirect(d).isFusion()){              //Si la valeur de c est égale à la valeur de son voisin direct vers le haut ET que son voisin direct n'as pas déjà été fusionné avec une autre case.
+                                c.getVoisinDirect(d).setValeur(c.getVoisinDirect(d).getValeur()*2);                     //Alors le voisin direct double sa valeur
+                                this.score+=c.getVoisinDirect(d).getValeur();                                           //Le score de la partie augmente de la nouvelle valeur de la case
+                                c.getVoisinDirect(d).setFusion(true);                                                   //L'attribut valeur passe à vrai pour annoncer qu'il à déjà été fusionner.
                                 
-                                if(c.getVoisinDirect(d).getValeur()>this.valeurMax){
-                                    this.valeurMax = c.getVoisinDirect(d).getValeur();
+                                if(c.getVoisinDirect(d).getValeur()>this.valeurMax){                                    //Si la nouvelle valeur du voisin direct est plus élevée que celle de la valeur max de la grille
+                                    this.valeurMax = c.getVoisinDirect(d).getValeur();                                      //Alors la valeur max change pour prendre la valeur de la case.
                                 }
-                            }else{
-                                if(c.getVoisinDirect(d)==null){
-                                    c.setY(0);
-                                }else{
-                                    if(c.getY()!=(c.getVoisinDirect(d).getY()-1)){
-                                        c.setY(c.getVoisinDirect(d).getY()-1);
+                            }else{                                                                                  //Sinon
+                                if(c.getVoisinDirect(d)==null){                                                         //Si il n'y a pas de vosin direct
+                                    c.setY(0);                                                                              //La valeut de l'ordonée de la case prends la valeur minimale (la plus haute pour la direction haut)
+                                }else{                                                                                  //Sinon
+                                    if(c.getY()!=(c.getVoisinDirect(d).getY()-1)){                                          //Si la valeur Y de la case "c" est différent que la valeur Y-1 de son voisin direct 
+                                        c.setY(c.getVoisinDirect(d).getY()-1);                                                  //Alors la valeur Y de la case "c" prends la valeur Y juste sous la case voisin direct 
                                     }
                                 }
-                                grille.add(c);
-                            }
-                            
-                            
-                            
-                        }
-                        
+                                grille.add(c);                                                                          //On peut ajouter c à la grille
+                            }  
+                        } 
                     }
                 }
                 
@@ -395,22 +360,21 @@ public class Grille implements Parametres {
                 }
                 break;
         }
-        this.setFusionOff();
+        this.setFusionOff();    //Lorsque l'on a fini de vérifier les mouvements de chaque case de la grille dans la direction choisie, on passe tout les attributs fusion à faux pour le prochain mouvement.
         
     }
-    private void fusion(Case c){
-        c.setValeur(c.getValeur()*2);
-        if(c.getValeur()>this.valeurMax){
-            this.valeurMax = c.getValeur();
-        }
-    }
     
+    /**
+     * Méthode qui renvoie un tableau de case situé à l'extrémité d'une direction
+     * @param direction
+     * @return 
+     */
     public Case[] getCasesExtremites(int direction){
         Case[] c= new Case[4];
         switch(direction){
             case haut:
-                for(int i=0;i<taille;i++){
-                        c[i]=this.getCase(i, 0).getVoisinDirect(-direction);
+                for(int i=0;i<taille;i++){                                      //Pour toute les cases situé sur la ligne du haut,
+                        c[i]=this.getCase(i, 0).getVoisinDirect(-direction);    //On ajoute dans la case i, la case voisin direct de direction bas
                 }
                 break;
             case droite:
@@ -430,36 +394,7 @@ public class Grille implements Parametres {
                 break;   
              
         }
-        return c;
+        return c; //On renvoie le tableau
     }
-    
-    public boolean lanceurDeplacerCases(int direction){
-        boolean b=false;
-        switch(direction){
-            case haut:
-                break;
-            case droite:
-                break;
-            case bas:
-                break;
-            case gauche:
-                break;
-        }
-        return b;
-    }
-    
-    private void deplacerCasesRecursif(Case[] extremites, int rangee, int direction, int compteur){
-        for(int i=0; i<extremites.length;i++){
-            this.grille.remove(extremites[i]);
-            if(extremites[i].getVoisinDirect(direction)==null){
-                                extremites[i].setY(-taille+1);
-                            }else{
-                                if(extremites[i].getY()!=(extremites[i].getVoisinDirect(direction).getY()+1)){
-                                    extremites[i].setY(extremites[i].getVoisinDirect(direction).getY()+1);
-                                }
-                                
-                            }
-            this.grille.add(extremites[i]);
-        }
-    }
+ 
 }
