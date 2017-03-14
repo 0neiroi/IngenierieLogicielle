@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-/build/
-=======
-/dist/
->>>>>>> origin/master
+/nbproject/*
+/build/*
+/dist/*
+
