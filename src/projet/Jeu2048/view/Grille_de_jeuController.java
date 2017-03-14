@@ -184,19 +184,23 @@ public class Grille_de_jeuController implements Initializable {
     public void saveButton(){
         // popup pour demander le nom du joueur
         // Récupération du pseudo du joueur 
-        String pseudo = "test";
+        String pseudo = "test1";
         // Récupération de l'objet grille que l'on veut sauvegarder
         Grille serGrille = this.mainApp.getMaGrille();
         try {
             File mySave = new File("./saves/" + pseudo);
             if(mySave.exists()){
                 //popup pour demander la confirmation d'écraser la sauvegarde précédente + date
+                System.out.println("écraser sauvegarde ?");
+            }else{
+                System.out.println("mySave n'existe pas");
             }
             FileOutputStream fileOut = new FileOutputStream(mySave);
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
             out.writeObject(serGrille);
             out.close();
             fileOut.close();
+            System.out.println("La sauvegarde de " + pseudo + " a bien été effectuée.");
         }catch(IOException i) {
             i.printStackTrace();
       }
