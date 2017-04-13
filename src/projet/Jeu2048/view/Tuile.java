@@ -27,6 +27,15 @@ public final class Tuile {
         this.setProprieties();
     }
     
+    public Tuile(int value,int x,int y){
+        this.tuileDeJeu = new Label();
+        //this.value = value;
+        this.tuileDeJeu.setText(""+value);
+        this.x=x;
+        this.y=y;
+        this.setProprieties();
+    }
+    
     
     public void setProprieties(){
         tuileDeJeu.setAlignment(Pos.CENTER);
@@ -35,6 +44,8 @@ public final class Tuile {
         tuileDeJeu.setPrefSize(60.0, 60.0);
         tuileDeJeu.setStyle("-fx-background-color: #f5f5dc; -fx-border-width: 1; -fx-border-color: black; -fx-border-radius: 25%;");
         tuileDeJeu.setTextOverrun(OverrunStyle.CLIP);
+        tuileDeJeu.setVisible(true);
+        
     }
              //styleClass="case" 
 }

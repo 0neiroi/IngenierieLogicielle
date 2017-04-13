@@ -162,7 +162,7 @@ public class Grille_de_jeuController implements Initializable {
             mainApp.getMaGrille().nouvelleCase();
         }
         
-        
+        this.callTuile();
         this.myGridPane.getChildren().removeAll();
         this.mainApp.getMaGrille().setValueId();
         for(int j=0;j>-4;j--){
@@ -173,5 +173,7 @@ public class Grille_de_jeuController implements Initializable {
             }
         score.setText(""+mainApp.getMaGrille().getScore());
     }
+    public void callTuile(){
     
+    }
 }
