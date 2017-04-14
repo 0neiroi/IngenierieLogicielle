@@ -29,7 +29,9 @@ import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.shape.Polygon;
 import javafx.scene.text.Text;
+import projet.Jeu2048.AI;
 import projet.Jeu2048.Fenetre2048;
 import projet.Jeu2048.model.Case;
 import projet.Jeu2048.model.Parametres;
@@ -63,6 +65,9 @@ public class Grille_de_jeuController implements Initializable {
     @FXML
     Label downBtn;
     
+    @FXML
+    Button letAIPaly;
+    
     
     /**
      * Initializes the controller class.
@@ -89,7 +94,15 @@ public class Grille_de_jeuController implements Initializable {
     private void handleButtonAction(Event event ) {
         String str="";
         if(event instanceof MouseEvent){
-            str = ((Label)event.getSource()).getId();
+            System.out.println("Mouse Event");
+            if( event.getSource() instanceof Label ){
+                str = ((Label)event.getSource()).getId();
+                System.out.println("TEST");
+            }else if ( event.getSource() instanceof Polygon ){
+                str = ((Polygon)event.getSource()).getId();
+                System.out.println("TEST");
+            }
+            
         }else if(event instanceof KeyEvent){
             //str = ((KeyEvent)event).getCharacter();
             InputContext context = InputContext.getInstance(); 
@@ -154,6 +167,9 @@ public class Grille_de_jeuController implements Initializable {
                     break;
             case "rightBtn":
                     mainApp.getMaGrille().seDeplacer(Parametres.droite);
+                    break;
+            case "letAIPlay":
+                    AI.tester(mainApp);
                     break;
                     
         } 
