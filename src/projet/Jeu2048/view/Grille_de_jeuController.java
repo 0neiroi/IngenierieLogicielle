@@ -6,6 +6,8 @@
 package projet.Jeu2048.view;
 
 import java.awt.im.InputContext;
+import java.io.File;
+import java.io.FileOutputStream;
 import javafx.scene.input.MouseEvent;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -21,6 +23,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.HashSet;
 import static javafx.application.ConditionalFeature.FXML;
 import javafx.event.Event;
@@ -32,6 +35,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import projet.Jeu2048.Fenetre2048;
 import projet.Jeu2048.model.Case;
+import projet.Jeu2048.model.Grille;
 import projet.Jeu2048.model.Parametres;
 import static projet.Jeu2048.model.Parametres.*;
 
@@ -62,6 +66,9 @@ public class Grille_de_jeuController implements Initializable {
     
     @FXML
     Label downBtn;
+    
+    @FXML
+    Button save;
     
     
     /**
@@ -107,6 +114,9 @@ public class Grille_de_jeuController implements Initializable {
                     break;
             case "d":
                     str="rightBtn";
+                    break;
+            case "e":
+                    str="save";
                     break;
             default:
                     System.out.println("NOP!");
@@ -155,6 +165,7 @@ public class Grille_de_jeuController implements Initializable {
             case "rightBtn":
                     mainApp.getMaGrille().seDeplacer(Parametres.droite);
                     break;
+            default: break;
                     
         } 
         if(!grilleCopie.equals(mainApp.getMaGrille().getGrille())){
@@ -168,6 +179,31 @@ public class Grille_de_jeuController implements Initializable {
                 }
             }
         score.setText(""+mainApp.getMaGrille().getScore());
+    }
+    @FXML
+    public void saveButton(){
+        // popup pour demander le nom du joueur
+        // Récupération du pseudo du joueur 
+        String pseudo = "test1";
+        // Récupération de l'objet grille que l'on veut sauvegarder
+        Grille serGrille = this.mainApp.getMaGrille();
+        try {
+            File mySave = new File("./saves/" + pseudo);
+            if(mySave.exists()){
+                //popup pour demander la confirmation d'écraser la sauvegarde précédente + date
+                System.out.println("écraser sauvegarde ?");
+            }else{
+                System.out.println("mySave n'existe pas");
+            }
+            FileOutputStream fileOut = new FileOutputStream(mySave);
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeObject(serGrille);
+            out.close();
+            fileOut.close();
+            System.out.println("La sauvegarde de " + pseudo + " a bien été effectuée.");
+        }catch(IOException i) {
+            i.printStackTrace();
+      }
     }
     
 }

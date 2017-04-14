@@ -5,11 +5,13 @@
  */
 package projet.Jeu2048.model;
 
+import java.io.Serializable;
+
 /**
  *
  * @author oneiroi
  */
-public class Case implements Parametres {
+public class Case implements Parametres, Serializable {
    /*Pour les coordonnées, nous considérerons que  le  point  d’origine  est  en  
    haut  à  gauche. Une  case  située tout  en  haut  à  gauche aura  pour coordonnées 
    (0;0).L’axe des abscisses va de la gauche vers la droite et la valeur en abscisse va 

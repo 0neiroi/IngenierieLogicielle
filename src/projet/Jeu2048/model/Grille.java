@@ -5,6 +5,7 @@
  */
 package projet.Jeu2048.model;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Random;
 
@@ -12,7 +13,7 @@ import java.util.Random;
  *
  * @author oneiroi
  */
-public class Grille implements Parametres {
+public class Grille implements Parametres, Serializable {
     private HashSet<Case> grille;
     private int valeurMax;
     private int score=0;
