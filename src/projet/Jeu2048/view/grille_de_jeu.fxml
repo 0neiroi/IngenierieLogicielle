@@ -2,13 +2,28 @@
 
 <?import java.lang.*?>
 <?import java.net.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.*?>
-<?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
+<?import java.lang.Double?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.shape.Polygon?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane id="AnchorPane" onKeyTyped="#handleButtonAction" prefHeight="417.0" prefWidth="414.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projet.Jeu2048.view.Grille_de_jeuController">
     <stylesheets>
@@ -30,9 +45,9 @@
                              <items>
                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="370.0" prefWidth="234.0">
                                     <children>
-                                       <Pane prefHeight="400.0" prefWidth="241.0">
+                                       <Pane id="myPane" prefHeight="400.0" prefWidth="240.0">
                                           <children>
-                                             <GridPane fx:id="myGridPane" layoutY="79.0" prefHeight="242.0" prefWidth="241.0">
+                                             <GridPane fx:id="myGridPane" layoutY="80.0" prefHeight="240.0" prefWidth="240.0">
                                                <columnConstraints>
                                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -46,7 +61,7 @@
                                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                </rowConstraints>
                                                 <children>
-                                                   <Label alignment="CENTER" blendMode="GREEN" graphicTextGap="5.0" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: #f5f5dc; -fx-border-width: 1; -fx-border-color: black; -fx-border-radius: 25%;" styleClass="case" textOverrun="CLIP">
+                                                   <Label alignment="CENTER" blendMode="GREEN" graphicTextGap="5.0" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: #f5f5dc; -fx-border-width: 1; -fx-border-color: black; -fx-border-radius: 25%; -fx-scale-z: -1;" styleClass="case" textOverrun="CLIP">
                                                       <font>
                                                          <Font name="Comic Sans MS" size="13.0" />
                                                       </font>
@@ -177,6 +192,7 @@
                                                 </children>
                                              </GridPane>
                                              <Text fx:id="score" layoutX="164.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="76.27099609375" />
+                                                <Pane fx:id="myPane" layoutY="80.0" prefHeight="240.0" prefWidth="240.0" />
                                           </children>
                                        </Pane>
                                     </children>

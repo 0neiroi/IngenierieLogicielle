@@ -29,6 +29,10 @@ public class Case implements Parametres {
         this.fusion=false;
     }
 
+    Case() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public int getX() {
         return x;
     }
@@ -73,7 +77,7 @@ public class Case implements Parametres {
     
     public String toString(){
         String str;
-        str="Cette case a pour coordonnées ("+this.x+";"+this.y+") et pour valeur "+ this.valeur;
+        str="Cette case a pour coordonnées ("+this.x+";"+this.y+") et pour valeur "+ this.valeur+ " Son id est "+this.id;
         
         return str;
     }
