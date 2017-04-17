@@ -91,7 +91,7 @@ public class Grille_de_jeuController implements Initializable {
     }
      
     @FXML 
-    private void handleButtonAction(Event event ) {
+    private void handleButtonAction(Event event ) throws InterruptedException {
         String str="";
         if(event instanceof MouseEvent){
             System.out.println("Mouse Event");
@@ -169,7 +169,18 @@ public class Grille_de_jeuController implements Initializable {
                     mainApp.getMaGrille().seDeplacer(Parametres.droite);
                     break;
             case "letAIPlay":
-                    AI.tester(mainApp);
+                    Thread t=new Thread();
+                    t.start();
+                        if(AI.getInteruption()){
+                            AI.setInteruption(false);
+                            AI.resolveTheGame(mainApp, t);
+                            System.out.println("FALSE");
+                        }else{
+                            AI.setInteruption(true);
+                            System.out.println("TRUE");
+                            t.stop();
+                        }
+
                     break;
                     
         } 
