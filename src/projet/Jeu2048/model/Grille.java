@@ -28,6 +28,11 @@ public class Grille implements Parametres, Serializable {
     public HashSet<Case> getGrille() {
         return grille;
     }
+    
+    public void setGrille(HashSet<Case> h){
+        
+        this.grille =h;
+    }
 
     public int getValeurMax() {
         return valeurMax;
@@ -49,9 +54,9 @@ public class Grille implements Parametres, Serializable {
     public String getCases(){
         String str="";
             for(int j=0;j>-4;j--){
-                str+="["+this.getCase(0,j).getValeur();
+                str+="["+this.getCase(0,j).getValeur()+" "+this.getCase(0, j).getId();
                 for(int i=1;i<4;i++){
-                    str+=","+this.getCase(i,j).getValeur();
+                    str+=","+this.getCase(i,j).getValeur()+" "+this.getCase(i, j).getId();
                 }
                 str+="]\n";
             }
@@ -61,11 +66,58 @@ public class Grille implements Parametres, Serializable {
         return str;
     }
     
+    public Case getCase(int id){
+        Case c=new Case(0,0,0);
+            for(Case ctmp:this.grille){
+                if(ctmp.getId()==id){
+                    c=ctmp;
+                }                    
+            }
+        return c;
+    }
+    
+    /**
+     *
+     * @param b
+     */
+    public void setValueId(){
+        
+            int k=1;
+        
+        for(int j=0;j>-4;j--){
+                this.getCase(0,j).setId(k);k+=1;
+                for(int i=1;i<4;i++){
+                    this.getCase(i,j).setId(k);k+=1;
+                }
+                
+            }
+    }
+    
+    public boolean setValueId(Case c){
+        boolean b=false;
+            
+            int k=1;
+            boolean trouve=false;
+            while(!trouve&&k<17){
+            for(Case c1 :this.grille){
+                if(k==c1.getId())trouve=true;
+            }
+            if (trouve) {k+=1;trouve=false;}else{c.setId(k);b=true;trouve=true;}
+        
+                
+            }
+            
+        
+        return b;
+    }
+    
     public void setFusionOff(){
         for(int j=0;j>-4;j--){
                 this.getCase(0,j).setFusion(false);
+                //this.getCase(0,j).setId(0);
                 for(int i=1;i<4;i++){
                     this.getCase(i,j).setFusion(false);
+                    //this.getCase(i,j).setId(0);
                 }
             }
     }
@@ -91,7 +143,8 @@ public class Grille implements Parametres, Serializable {
         System.exit(0);
     }
     
-    public boolean nouvelleCase(){
+    public HashSet<Case> nouvelleCase(){
+        
         boolean b=false;
         Random ra=new Random();
         int valeurNC;
@@ -101,6 +154,7 @@ public class Grille implements Parametres, Serializable {
             int a = ra.nextInt(4);
             int o = (-1)*ra.nextInt(4);
             Case c=new Case(a,o,valeurNC);
+            
             c.setMaGrille(this);
             while(!b){
                 boolean b1=false;
@@ -110,6 +164,7 @@ public class Grille implements Parametres, Serializable {
                     }
                 }
                 if(!b1){
+                    this.setValueId(c);
                     this.grille.add(c);
                     for(Case c1 : grille){
                         if(c1.getValeur()>this.valeurMax){
@@ -125,7 +180,7 @@ public class Grille implements Parametres, Serializable {
                 }
             }
         }
-        
+
         for(Case c1:grille){
             for(Case c2:grille){
                 if(c1.egals(c2)){
@@ -142,7 +197,9 @@ public class Grille implements Parametres, Serializable {
         }
         
         
-        return b;
+        //System.out.println(this.getCases());
+        return grille;
+        
     }
     
     public boolean partieFinie(){
@@ -181,8 +238,8 @@ public class Grille implements Parametres, Serializable {
         return b;
     }
     
-    public void seDeplacer(int d){
-        
+    public HashSet<Case> seDeplacer(int d){
+
         for(Case c1:grille){
             for(Case c2:grille){
                 if(c1.egals(c2)){
@@ -196,7 +253,7 @@ public class Grille implements Parametres, Serializable {
                 }
             }
         }
-        
+                                                         
         Case c;
         switch(d){
             case haut:
@@ -204,6 +261,9 @@ public class Grille implements Parametres, Serializable {
                     for(int j=-1;j>-taille;j--){
                         if(this.getCase(i, j).getValeur()!=0){
                             c=this.getCase(i, j);
+                           
+                            int id = c.getId();
+                        
                             this.grille.remove(c);
                             if(c.valeurEgale(c.getVoisinDirect(d))&&!c.getVoisinDirect(d).isFusion()){
                                 c.getVoisinDirect(d).setValeur(c.getVoisinDirect(d).getValeur()*2);
@@ -221,9 +281,12 @@ public class Grille implements Parametres, Serializable {
                                         c.setY(c.getVoisinDirect(d).getY()-1);
                                     }
                                 }
+                                
+                                c.setId(id);
+                              
                                 grille.add(c);
                             }
-                            
+                           
                             
                             
                         }
@@ -238,6 +301,9 @@ public class Grille implements Parametres, Serializable {
                     for(int j=taille-2;j>-1;j--){
                         if(this.getCase(j, i).getValeur()!=0){
                             c=this.getCase(j, i);
+                       
+                            int id = c.getId();
+                     
                             this.grille.remove(c);
                             
                             if(c.valeurEgale(c.getVoisinDirect(d))&&!c.getVoisinDirect(d).isFusion()){
@@ -257,6 +323,8 @@ public class Grille implements Parametres, Serializable {
                                     }
 
                                 }
+                            
+                                c.setId(id);
                                 grille.add(c);
                             }
                             
@@ -270,11 +338,14 @@ public class Grille implements Parametres, Serializable {
                 
                 break;
             case bas:
-                
+
                 for(int i=0;i<taille;i++){
                     for(int j=(-taille)+2;j<1;j++){
                         if(this.getCase(i, j).getValeur()!=0){
                             c=this.getCase(i, j);
+                        
+                            int id = c.getId();
+                        
                             this.grille.remove(c);
                             if(c.valeurEgale(c.getVoisinDirect(d))&&!c.getVoisinDirect(d).isFusion()){
                                 c.getVoisinDirect(d).setValeur(c.getVoisinDirect(d).getValeur()*2);
@@ -292,13 +363,20 @@ public class Grille implements Parametres, Serializable {
                                     }
 
                                 }
+                                
+                                c.setId(id);
+                                
+                                
+                                
                                 grille.add(c);
+                                
                             }
                             
                             
                         }
                     }
                 }
+                
                 break;
             case gauche:
                 
@@ -306,6 +384,9 @@ public class Grille implements Parametres, Serializable {
                     for(int j=1;j<taille;j++){
                         if(this.getCase(j, i).getValeur()!=0){
                             c=this.getCase(j, i);
+                         
+                            int id = c.getId();
+                     
                             this.grille.remove(c);
                             if(c.valeurEgale(c.getVoisinDirect(d))&&!c.getVoisinDirect(d).isFusion()){
                                 c.getVoisinDirect(d).setValeur(c.getVoisinDirect(d).getValeur()*2);
@@ -323,6 +404,8 @@ public class Grille implements Parametres, Serializable {
                                     }
 
                                 }
+     
+                                c.setId(id);
                                 grille.add(c);
                             }
                             
@@ -332,8 +415,11 @@ public class Grille implements Parametres, Serializable {
                 }
                 break;
         }
+        
+
         this.setFusionOff();
         
+        return grille;
     }
     private void fusion(Case c){
         c.setValeur(c.getValeur()*2);

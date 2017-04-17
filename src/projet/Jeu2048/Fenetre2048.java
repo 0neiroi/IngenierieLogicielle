@@ -37,6 +37,8 @@ public class Fenetre2048 extends Application {
     public Fenetre2048() {
         this.maGrille.nouvelleCase();
         this.maGrille.nouvelleCase();
+        this.maGrille.setValueId();
+        System.out.println(this.maGrille.getCases());
     }
 
     @Override
@@ -100,6 +102,12 @@ public class Fenetre2048 extends Application {
 
     public static void main(String[] args) {
         launch(args);
+    }
+    
+    public void setMaGrille(Grille maGrille){
+        
+        this.maGrille = maGrille;
+        
     }
     
 }

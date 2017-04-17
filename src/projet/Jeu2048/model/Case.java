@@ -22,6 +22,7 @@ public class Case implements Parametres, Serializable {
     private int valeur;
     private Grille maGrille;
     private boolean fusion;
+    private int id;
     
     /**
      * Constructeur public d'une Case avec la valeur de son abscisse, son ordonnée et sa valeur en attributs,     * 
@@ -38,10 +39,17 @@ public class Case implements Parametres, Serializable {
         this.fusion=false;
     }
 
+
     /**
      * Méthode qui retourne la valeur de l'abscisse de la case.
      * @return 
      */
+
+    Case() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+
     public int getX() {
         return x;
     }
@@ -53,11 +61,21 @@ public class Case implements Parametres, Serializable {
     public void setX(int x) {
         this.x = x;
     }
+
     
     /**
      * Méthode qui retourne la valeur de l'ordonée de la case.
      * @return 
      */
+
+    public int getId(){
+        return this.id;
+    }
+    public void setId(int i){
+        this.id=i;
+    }
+
+
     public int getY() {
         return y;
     }
@@ -116,7 +134,7 @@ public class Case implements Parametres, Serializable {
      */
     public String toString(){
         String str;
-        str="Cette case a pour coordonnées ("+this.x+";"+this.y+") et pour valeur "+ this.valeur;
+        str="Cette case a pour coordonnées ("+this.x+";"+this.y+") et pour valeur "+ this.valeur+ " Son id est "+this.id;
         
         return str;
     }
@@ -224,3 +242,4 @@ public class Case implements Parametres, Serializable {
     }
     
 }
+
