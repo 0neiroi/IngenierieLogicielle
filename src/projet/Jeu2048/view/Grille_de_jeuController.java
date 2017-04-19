@@ -7,6 +7,7 @@ package projet.Jeu2048.view;
 
 import java.awt.im.InputContext;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import javafx.scene.input.MouseEvent;
 import java.net.URL;
@@ -25,12 +26,16 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.HashSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import static javafx.application.ConditionalFeature.FXML;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import projet.Jeu2048.Fenetre2048;
@@ -70,6 +75,8 @@ public class Grille_de_jeuController implements Initializable {
     @FXML
     Button save;
     
+    @FXML
+    TextField tfPseudo;
     
     /**
      * Initializes the controller class.
@@ -180,30 +187,64 @@ public class Grille_de_jeuController implements Initializable {
             }
         score.setText(""+mainApp.getMaGrille().getScore());
     }
-    @FXML
-    public void saveButton(){
-        // popup pour demander le nom du joueur
-        // Récupération du pseudo du joueur 
-        String pseudo = "test1";
-        // Récupération de l'objet grille que l'on veut sauvegarder
+    
+    public void sauvegarde(String pseudo){
+        System.out.println(pseudo);
+        // La grille à sauvegarder 
         Grille serGrille = this.mainApp.getMaGrille();
+        
+        // Le nom du fichier dans lequel la grille sera sauvegardée
+        String fileName = "test";
         try {
-            File mySave = new File("./saves/" + pseudo);
-            if(mySave.exists()){
-                //popup pour demander la confirmation d'écraser la sauvegarde précédente + date
-                System.out.println("écraser sauvegarde ?");
-            }else{
-                System.out.println("mySave n'existe pas");
-            }
-            FileOutputStream fileOut = new FileOutputStream(mySave);
-            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            
+            FileOutputStream sauv = new FileOutputStream("/saves/test2.ser");
+            ObjectOutputStream out = new ObjectOutputStream(sauv);
             out.writeObject(serGrille);
             out.close();
-            fileOut.close();
-            System.out.println("La sauvegarde de " + pseudo + " a bien été effectuée.");
-        }catch(IOException i) {
-            i.printStackTrace();
-      }
+            sauv.close();
+            System.out.println("Sauvegarde réalisée");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } 
+        
+    }
+    
+    @FXML
+    public void saveButton(){
+        
+        System.out.println("saveButton");
+        
+        // Récupération du pseudo du joueur 
+        TextField pseudo = new TextField();
+        sauvegarde(pseudo.getText());
+        //popup pour demander la confirmation d'écraser la sauvegarde précédente + date
+        /*
+        FlowPane flowPane = new FlowPane();
+        System.out.println(flowPane.getChildren());
+        Button confirm = new Button("valider");
+        Label texte = new Label("");
+        confirm.setOnAction(new EventHandler<ActionEvent>(){
+            @Override
+            public void handle(ActionEvent event) {
+                System.out.println("coucou");
+                        
+            }
+            
+        }) ;
+        flowPane.getChildren().addAll(confirm);
+        Scene scene = new Scene(flowPane, 200, 100);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.setTitle("Écraser sauvegarde ?");
+        stage.show();
+        */
+    }
+    
+    public void ButtonClicked(ActionEvent e){
+        Boolean save = false;
+        
+        // Récupération de l'objet grille que l'on veut sauvegarder
+        
     }
     
 }
