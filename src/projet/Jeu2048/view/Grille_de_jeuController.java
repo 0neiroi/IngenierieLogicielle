@@ -24,13 +24,19 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import static javafx.application.ConditionalFeature.FXML;
+import static javafx.collections.FXCollections.observableArrayList;
+import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -76,6 +82,9 @@ public class Grille_de_jeuController implements Initializable {
     
     @FXML
     TextField pseudo;
+    
+    @FXML
+    Button load;
     
     
     /**
@@ -191,7 +200,7 @@ public class Grille_de_jeuController implements Initializable {
     @FXML
     public void saveButton(){
         // Récupération du pseudo du joueur 
-        File mySave = new File("./saves/" + pseudo.getText());
+        File mySave = new File("./saves/" + pseudo.getText() + ".sv");
         
         if(mySave.exists()){
             //popup pour demander la confirmation d'écraser la sauvegarde précédente
@@ -235,4 +244,37 @@ public class Grille_de_jeuController implements Initializable {
         
     }
     
+    /**
+     * Fonction appelée au click du bouton load
+     */
+    
+    public void loadButton(){
+        FlowPane listFP = new FlowPane();
+        File dir = new File("./saves/");
+        ObservableList<String> saves = trierListe(new ArrayList(Arrays.asList(dir.list())));
+        ListView<String> listView = new ListView<String>(saves);
+        listFP.getChildren().addAll(listView);
+        Scene scene = new Scene(listFP, 200, 500);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.setTitle("Choisir la sauvegarde");
+        stage.show();
+    }
+    
+    /**
+     * Fonction qui permet de ne garder que les fichiers de sauvegarde
+     * Sur mac, le fichier .DS_Store apparaissait dans la liste alors qu'il ne contient pas de sauvegarde
+     * @param list
+     * @return
+     */
+    public ObservableList<String> trierListe(ArrayList<String> list){
+        for(int i=0; i < list.size() ; i++){
+            System.out.println(list.get(i));
+            if(list.get(i).substring(list.get(i).length() - 3) != ".sv"){
+                list.remove(i);
+            }
+        }
+        return observableArrayList(observableArrayList(list));
+    }
+
 }
