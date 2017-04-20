@@ -25,12 +25,16 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.HashSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import static javafx.application.ConditionalFeature.FXML;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import projet.Jeu2048.Fenetre2048;
@@ -69,6 +73,9 @@ public class Grille_de_jeuController implements Initializable {
     
     @FXML
     Button save;
+    
+    @FXML
+    TextField pseudo;
     
     
     /**
@@ -180,30 +187,52 @@ public class Grille_de_jeuController implements Initializable {
             }
         score.setText(""+mainApp.getMaGrille().getScore());
     }
+    
     @FXML
     public void saveButton(){
-        // popup pour demander le nom du joueur
         // Récupération du pseudo du joueur 
-        String pseudo = "test1";
-        // Récupération de l'objet grille que l'on veut sauvegarder
-        Grille serGrille = this.mainApp.getMaGrille();
+        File mySave = new File("./saves/" + pseudo.getText());
+        
+        if(mySave.exists()){
+            //popup pour demander la confirmation d'écraser la sauvegarde précédente
+            FlowPane flowPane = new FlowPane();
+            Button confirm = new Button("Oui");
+            Label texte = new Label("Écraser la sauvegarde de " + pseudo.getText() + " ?");
+            
+            flowPane.getChildren().addAll(texte, confirm);
+            Scene scene = new Scene(flowPane, 200, 100);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.setTitle("Écraser sauvegarde ?");
+            stage.show();
+            confirm.setOnAction(new EventHandler<ActionEvent>(){
+                @Override
+                public void handle(ActionEvent event) {
+                    sauvegarder(mySave);
+                    stage.close();
+                }
+            }) ;
+        } else {
+            sauvegarder(mySave);
+        }
+    }
+    
+    public void sauvegarder(File mySave){
         try {
-            File mySave = new File("./saves/" + pseudo);
-            if(mySave.exists()){
-                //popup pour demander la confirmation d'écraser la sauvegarde précédente + date
-                System.out.println("écraser sauvegarde ?");
-            }else{
-                System.out.println("mySave n'existe pas");
-            }
+            // Objet à sérialiser
+            Grille serGrille = this.mainApp.getMaGrille();
+            
             FileOutputStream fileOut = new FileOutputStream(mySave);
-            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            ObjectOutputStream out;
+            out = new ObjectOutputStream(fileOut);
             out.writeObject(serGrille);
             out.close();
             fileOut.close();
-            System.out.println("La sauvegarde de " + pseudo + " a bien été effectuée.");
-        }catch(IOException i) {
-            i.printStackTrace();
-      }
+            System.out.println("La sauvegarde a bien été effectuée.");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        
     }
     
 }
