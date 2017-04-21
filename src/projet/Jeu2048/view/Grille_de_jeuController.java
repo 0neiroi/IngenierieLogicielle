@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -7,6 +8,8 @@ package projet.Jeu2048.view;
 
 import java.awt.im.InputContext;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import javafx.scene.input.MouseEvent;
 import java.net.URL;
@@ -24,16 +27,34 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
+
 import java.util.function.Consumer;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import static javafx.application.ConditionalFeature.FXML;
+import static javafx.collections.FXCollections.observableArrayList;
+import javafx.collections.ObservableList;
+
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
@@ -80,6 +101,12 @@ public class Grille_de_jeuController implements Initializable {
     
     @FXML
     Button save;
+    
+    @FXML
+    TextField pseudo;
+    
+    @FXML
+    Button load;
     
     
     private Pane p = new Pane(); // panneau utilisé pour dessiner une tuile "2"
@@ -306,33 +333,98 @@ public class Grille_de_jeuController implements Initializable {
         //myPane.setVisible(true);
         score.setText(""+mainApp.getMaGrille().getScore());
     }
-
+    
     @FXML
     public void saveButton(){
-        // popup pour demander le nom du joueur
         // Récupération du pseudo du joueur 
-        String pseudo = "test1";
-        // Récupération de l'objet grille que l'on veut sauvegarder
-        Grille serGrille = this.mainApp.getMaGrille();
+        File mySave = new File("./saves/" + pseudo.getText() + ".sv");
+        
+        if(mySave.exists()){
+            //popup pour demander la confirmation d'écraser la sauvegarde précédente
+            FlowPane flowPane = new FlowPane();
+            Button confirm = new Button("Oui");
+            Label texte = new Label("Écraser la sauvegarde de " + pseudo.getText() + " ?");
+            
+            flowPane.getChildren().addAll(texte, confirm);
+            Scene scene = new Scene(flowPane, 200, 100);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.setTitle("Écraser sauvegarde ?");
+            stage.show();
+            confirm.setOnAction(new EventHandler<ActionEvent>(){
+                @Override
+                public void handle(ActionEvent event) {
+                    sauvegarder(mySave);
+                    stage.close();
+                }
+            }) ;
+        } else {
+            sauvegarder(mySave);
+        }
+    }
+    
+    public void sauvegarder(File mySave){
         try {
-            File mySave = new File("./saves/" + pseudo);
-            if(mySave.exists()){
-                //popup pour demander la confirmation d'écraser la sauvegarde précédente + date
-                System.out.println("écraser sauvegarde ?");
-            }else{
-                System.out.println("mySave n'existe pas");
-            }
+            // Objet à sérialiser
+            Grille serGrille = this.mainApp.getMaGrille();
+            
             FileOutputStream fileOut = new FileOutputStream(mySave);
-            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            ObjectOutputStream out;
+            out = new ObjectOutputStream(fileOut);
             out.writeObject(serGrille);
             out.close();
             fileOut.close();
-            System.out.println("La sauvegarde de " + pseudo + " a bien été effectuée.");
-        }catch(IOException i) {
-            i.printStackTrace();
-      }
+            System.out.println("La sauvegarde a bien été effectuée.");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        
     }
     
+    /**
+     * Fonction appelée au click du bouton load
+     */
+    
+    public void loadButton(){
+        FlowPane listFP = new FlowPane();
+        File dir = new File("./saves/");
+        ObservableList<String> saves = trierListe(new ArrayList(Arrays.asList(dir.list())));
+        ListView<String> listView = new ListView<String>(saves);
+        
+        listFP.getChildren().addAll(listView);
+        Scene scene = new Scene(listFP, 200, 500);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.setTitle("Choisir la sauvegarde");
+        stage.show();
+        
+        listView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+            @Override
+            public void handle(MouseEvent event) {
+                ouvrir(listView.getSelectionModel().getSelectedItem());
+                stage.close();
+            }});
+    }
+    
+    /**
+     * Fonction qui permet de ne garder que les fichiers de sauvegarde
+     * Sur mac, le fichier .DS_Store apparaissait dans la liste alors qu'il ne contient pas de sauvegarde
+     * @param list
+     * @return
+     */
+    public ObservableList<String> trierListe(ArrayList<String> list){
+        
+        for(int i=0; i < list.size() ; i++){
+            String sub = list.get(i).substring(list.get(i).length() - 3);
+            if(sub.compareTo(".sv") != 0){
+                list.remove(i);
+                i -= 1;
+            }
+        }
+        return observableArrayList(observableArrayList(list));
+    }
+
 
     public void callTuile(Pane paneTmp,int d){
      /*   // ligne à décommenter pour activer les animations
@@ -451,5 +543,20 @@ public class Grille_de_jeuController implements Initializable {
     }
 
    
+
+
+    public void ouvrir (String fileName){
+        try {
+            FileInputStream fis = new FileInputStream("./saves/" + fileName);
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            Grille deserGrille = (Grille)ois.readObject();
+            fis.close();ois.close();
+            mainApp.loadGrille(deserGrille);
+            mainApp.showOverview();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
 
 }

@@ -103,11 +103,15 @@ public class Fenetre2048 extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    
+
     public void setMaGrille(Grille maGrille){
         
         this.maGrille = maGrille;
         
+    }
+    public void loadGrille(Grille chargee){
+        maGrille = chargee;
+
     }
     
 }
