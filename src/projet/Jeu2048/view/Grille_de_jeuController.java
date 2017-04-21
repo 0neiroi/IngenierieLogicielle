@@ -268,12 +268,16 @@ public class Grille_de_jeuController implements Initializable {
      * @return
      */
     public ObservableList<String> trierListe(ArrayList<String> list){
+        System.out.println(list);
         for(int i=0; i < list.size() ; i++){
-            System.out.println(list.get(i));
-            if(list.get(i).substring(list.get(i).length() - 3) != ".sv"){
+            String sub = list.get(i).substring(list.get(i).length() - 3);
+            System.out.println(sub);
+            if(sub.compareTo(".sv") != 0){
                 list.remove(i);
+                i -= 1;
             }
         }
+        System.out.println(list);
         return observableArrayList(observableArrayList(list));
     }
 
