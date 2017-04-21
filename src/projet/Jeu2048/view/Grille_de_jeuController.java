@@ -7,6 +7,8 @@ package projet.Jeu2048.view;
 
 import java.awt.im.InputContext;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import javafx.scene.input.MouseEvent;
 import java.net.URL;
@@ -23,6 +25,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -253,12 +256,21 @@ public class Grille_de_jeuController implements Initializable {
         File dir = new File("./saves/");
         ObservableList<String> saves = trierListe(new ArrayList(Arrays.asList(dir.list())));
         ListView<String> listView = new ListView<String>(saves);
+        
         listFP.getChildren().addAll(listView);
         Scene scene = new Scene(listFP, 200, 500);
         Stage stage = new Stage();
         stage.setScene(scene);
         stage.setTitle("Choisir la sauvegarde");
         stage.show();
+        
+        listView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+            @Override
+            public void handle(MouseEvent event) {
+                ouvrir(listView.getSelectionModel().getSelectedItem());
+                stage.close();
+            }});
     }
     
     /**
@@ -268,17 +280,28 @@ public class Grille_de_jeuController implements Initializable {
      * @return
      */
     public ObservableList<String> trierListe(ArrayList<String> list){
-        System.out.println(list);
+        
         for(int i=0; i < list.size() ; i++){
             String sub = list.get(i).substring(list.get(i).length() - 3);
-            System.out.println(sub);
             if(sub.compareTo(".sv") != 0){
                 list.remove(i);
                 i -= 1;
             }
         }
-        System.out.println(list);
         return observableArrayList(observableArrayList(list));
+    }
+    
+    public void ouvrir (String fileName){
+        try {
+            FileInputStream fis = new FileInputStream("./saves/" + fileName);
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            Grille deserGrille = (Grille)ois.readObject();
+            fis.close();ois.close();
+            mainApp.loadGrille(deserGrille);
+            mainApp.showOverview();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
 }

@@ -102,4 +102,8 @@ public class Fenetre2048 extends Application {
         launch(args);
     }
     
+    public void loadGrille(Grille chargee){
+        maGrille = chargee;
+    }
+    
 }
