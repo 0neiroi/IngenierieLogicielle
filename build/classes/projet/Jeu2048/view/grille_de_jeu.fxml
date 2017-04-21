@@ -417,35 +417,18 @@
                                              <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
                                           </rowConstraints>
                                        </GridPane>
-                                       <ToolBar layoutX="-6.0" layoutY="-4.0" orientation="VERTICAL" prefHeight="160.0" prefWidth="163.0">
+                                       <ToolBar layoutX="-6.0" layoutY="-4.0" orientation="VERTICAL" prefHeight="144.0" prefWidth="156.0">
                                          <items>
 
                                             <Button alignment="TOP_CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="23.0" text="?" />
                                             <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" />
-                                            <TextField fx:id="pseudo" prefHeight="27.0" prefWidth="146.0" promptText="pseudo" />
+                                            <TextField fx:id="pseudo" minHeight="-Infinity" minWidth="-Infinity" prefHeight="27.0" prefWidth="100.0" promptText="pseudo" />
                                             <ButtonBar prefHeight="40.0" prefWidth="200.0">
                                               <buttons>
                                                 <Button fx:id="load" mnemonicParsing="false" onAction="#loadButton" text="Load" />
                                                 <Button fx:id="save" mnemonicParsing="false" onAction="#saveButton" prefHeight="27.0" prefWidth="49.0" text="Save" />
                                               </buttons>
                                             </ButtonBar>
-
-                                           <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="23.0" text="?" />
-                                            <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0">
-                                               <graphic>
-                                                  <Polygon fill="#0bab48" rotate="90.0" scaleX="0.15" scaleY="0.15" stroke="BLACK" strokeType="INSIDE">
-                                                    <points>
-                                                      <Double fx:value="-50.0" />
-                                                      <Double fx:value="40.0" />
-                                                      <Double fx:value="50.0" />
-                                                      <Double fx:value="40.0" />
-                                                      <Double fx:value="0.0" />
-                                                      <Double fx:value="-60.0" />
-                                                    </points>
-                                                  </Polygon>
-                                               </graphic>
-                                            </Button>
-                                            <TextField layoutX="10.0" layoutY="48.0" prefHeight="27.0" prefWidth="144.0" promptText="pseudo" />
                                           
                                          </items>
                                        </ToolBar>
