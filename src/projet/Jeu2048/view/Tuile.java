@@ -50,43 +50,43 @@ public final class Tuile extends Label {
         this.setBlendMode(BlendMode.GREEN);
         this.setGraphicTextGap(5.0);
         this.setPrefSize(60.0, 60.0);
-        this.setStyle("-fx-background-color: #f5f5dc; -fx-border-width: 1; -fx-border-color: black; -fx-border-radius: 25%; ");
+        this.setStyle("-fx-background-color: #f5f5dc; -fx-border-width: 1; -fx-border-color: black; -fx-border-radius: 25%; -fx-color:black;");
         switch(value){
             case 2:
-                this.setStyle("-fx-background-color: cornsilk ; -fx-border-width: 1; -fx-border-color: black; -fx-border-radius: 25%;");
+                this.setStyle("-fx-background-color: cornsilk ; -fx-border-width: 1; -fx-border-color: black; -fx-border-radius: 25%; -fx-color:black;");
                 break;
             case 4:
-                this.setStyle("-fx-background-color: peachpuff; -fx-border-width: 1; -fx-border-color: black; -fx-border-radius: 25%;");
+                this.setStyle("-fx-background-color: peachpuff; -fx-border-width: 1; -fx-border-color: black; -fx-border-radius: 25%; -fx-color:black;");
                 break;
             case 8:
-                this.setStyle("-fx-background-color: mistyrose ;-fx-border-width: 1; -fx-border-color: black; -fx-border-radius: 25%;");
+                this.setStyle("-fx-background-color: mistyrose ;-fx-border-width: 1; -fx-border-color: black; -fx-border-radius: 25%; -fx-color:black;");
                 break;
             case 16:
-                this.setStyle("-fx-background-color: lightpink; -fx-border-width: 1; -fx-border-color: black; -fx-border-radius: 25%;");
+                this.setStyle("-fx-background-color: lightpink; -fx-border-width: 1; -fx-border-color: black; -fx-border-radius: 25%; -fx-color:black;");
                 break;
             case 32:
-                this.setStyle("-fx-background-color: lightcoral; -fx-border-width: 1; -fx-border-color: black; -fx-border-radius: 25%;");
+                this.setStyle("-fx-background-color: lightcoral; -fx-border-width: 1; -fx-border-color: black; -fx-border-radius: 25%; -fx-color:black;");
                 break;
             case 64:
-                this.setStyle("-fx-background-color: indianred ;-fx-border-width: 1; -fx-border-color: black; -fx-border-radius: 25%;");
+                this.setStyle("-fx-background-color: indianred ;-fx-border-width: 1; -fx-border-color: black; -fx-border-radius: 25%; -fx-color:black;");
                 break;
             case 128:
-                this.setStyle("-fx-background-color: coral; -fx-border-width: 1; -fx-border-color: black; -fx-border-radius: 25%;");
+                this.setStyle("-fx-background-color: coral; -fx-border-width: 1; -fx-border-color: black; -fx-border-radius: 25%; -fx-color:black;");
                 break;
             case 256:
-                this.setStyle("-fx-background-color: hotpink; -fx-border-width: 1; -fx-border-color: black; -fx-border-radius: 25%;");
+                this.setStyle("-fx-background-color: hotpink; -fx-border-width: 1; -fx-border-color: black; -fx-border-radius: 25%; -fx-color:black;");
                 break;
             case 512:
-                this.setStyle("-fx-background-color: deeppink ;-fx-border-width: 1; -fx-border-color: black; -fx-border-radius: 25%;");
+                this.setStyle("-fx-background-color: deeppink ;-fx-border-width: 1; -fx-border-color: black; -fx-border-radius: 25%; -fx-color:black;");
                 break;
             case 1024:
-                this.setStyle("-fx-background-color: fushia; -fx-border-width: 1; -fx-border-color: black; -fx-border-radius: 25%;");
+                this.setStyle("-fx-background-color: fuchsia; -fx-border-width: 1; -fx-border-color: black; -fx-border-radius: 25%; -fx-color:black;");
                 break;
             case 2048:
-                this.setStyle("-fx-background-color: red; -fx-border-width: 1; -fx-border-color: black; -fx-border-radius: 25%;");
+                this.setStyle("-fx-background-color: red; -fx-border-width: 1; -fx-border-color: black; -fx-border-radius: 25%; -fx-color:black;");
                 break;
             default:
-                 this.setStyle("-fx-background-color: whitesmoke; -fx-border-width: 1; -fx-border-color: black; -fx-border-radius: 25%;");
+                 this.setStyle("-fx-background-color: whitesmoke; -fx-border-width: 1; -fx-border-color: black; -fx-border-radius: 25%; -fx-color:black;");
                  this.setText("");
                 break;
         }

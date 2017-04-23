@@ -66,6 +66,7 @@ import static projet.Jeu2048.model.Parametres.bas;
 import static projet.Jeu2048.model.Parametres.droite;
 import static projet.Jeu2048.model.Parametres.gauche;
 import static projet.Jeu2048.model.Parametres.haut;
+import static projet.Jeu2048.model.Parametres.objectif;
 
 
 /**
@@ -107,6 +108,21 @@ public class Grille_de_jeuController implements Initializable {
     
     @FXML
     Button load;
+    
+    @FXML
+    Label scoreFinish;
+    
+    @FXML
+    Label resultat; 
+    
+    @FXML
+    Label quit;
+    
+    @FXML
+    Label retry;
+    
+    @FXML
+    Pane paneFinish; 
     
     
     private Pane p = new Pane(); // panneau utilisé pour dessiner une tuile "2"
@@ -162,7 +178,7 @@ public class Grille_de_jeuController implements Initializable {
     }
      
     @FXML 
-    private void handleButtonAction(Event event ) {
+    private void handleButtonAction(Event event ) throws IOException {
         String str="";
         if(event instanceof MouseEvent){
             str = ((Label)event.getSource()).getId();
@@ -332,6 +348,33 @@ public class Grille_de_jeuController implements Initializable {
         
         //myPane.setVisible(true);
         score.setText(""+mainApp.getMaGrille().getScore());
+        //mainApp.getMaGrille().setValeurMax(2048); // test écran de fin
+        if(objectif <= mainApp.getMaGrille().getValeurMax()){
+            
+            
+             FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Fenetre2048.class.getResource("view/finishPanel.fxml"));
+            Pane personOverview = (Pane) loader.load();
+            mainApp.getBorderPane().setCenter(personOverview);
+            resultat.setText("Victoire");
+            scoreFinish.setText(""+mainApp.getMaGrille().getScore());
+            scoreFinish.setVisible(true);
+            resultat.setVisible(true);
+            
+            
+            //mainApp.showOverview();
+        }else if(mainApp.getMaGrille().partieFinie()){
+            
+             FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Fenetre2048.class.getResource("view/finishPanel.fxml"));
+            Pane personOverview = (Pane) loader.load();
+            mainApp.getBorderPane().setCenter(personOverview);
+            scoreFinish.setText(""+mainApp.getMaGrille().getScore());
+            resultat.setText("Défaite");
+            scoreFinish.setVisible(true);
+            resultat.setVisible(true);
+            //mainApp.showOverview();
+        }
     }
     
     @FXML
@@ -558,5 +601,37 @@ public class Grille_de_jeuController implements Initializable {
         }
     }
 
+    
+    
+    
+    
+    
+    @FXML
+    public void quit(){
+        System.exit(0);
+    }
+    
+    @FXML
+    public void retry(){
+//    mainApp.getPrimaryStage().close();
+      Platform.runLater( () -> {
+        try {
+            new Fenetre2048().start( new Stage() );
+        } catch (IOException ex) {
+            Logger.getLogger(Grille_de_jeuController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    } );
+    }
+    
+    @FXML
+    public void pressMouse(MouseEvent event){
+    
+        if(((Label)(event.getSource())).getId().equals("retry")){
+            retry();
+        }else if(((Label)(event.getSource())).getId().equals("quit")){
+            quit();
+        }
+    }
+    
 
 }

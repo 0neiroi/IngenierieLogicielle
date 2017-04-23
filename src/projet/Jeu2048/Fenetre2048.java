@@ -113,5 +113,8 @@ public class Fenetre2048 extends Application {
         maGrille = chargee;
 
     }
+    public BorderPane getBorderPane(){
+        return this.rootLayout;
+    }
     
 }

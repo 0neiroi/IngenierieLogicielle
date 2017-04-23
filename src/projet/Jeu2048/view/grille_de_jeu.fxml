@@ -1,14 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
-<?import java.lang.*?>
-<?import java.net.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.text.*?>
-
 <?import java.lang.Double?>
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
@@ -29,23 +20,23 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" onKeyTyped="#handleButtonAction" prefHeight="417.0" prefWidth="414.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projet.Jeu2048.view.Grille_de_jeuController">
+<AnchorPane id="AnchorPane" onKeyTyped="#handleButtonAction" prefHeight="417.0" prefWidth="451.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projet.Jeu2048.view.Grille_de_jeuController">
     <stylesheets>
         <URL value="@grille_de_jeu.css" />
     </stylesheets>
    <children>
        
        
-       <Pane prefHeight="417.0" prefWidth="414.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+       <Pane prefHeight="417.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
       <children>
        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-         <TabPane prefHeight="417.0" prefWidth="414.0" tabClosingPolicy="UNAVAILABLE">
+         <TabPane prefHeight="417.0" prefWidth="450.0" tabClosingPolicy="UNAVAILABLE">
            <tabs>
              <Tab text="Game">
                <content>
-                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="388.0" prefWidth="450.0">
                         <children>
-                           <SplitPane dividerPositions="0.5922330097087378" prefHeight="384.0" prefWidth="414.0">
+                           <SplitPane dividerPositions="0.5434298440979956" prefHeight="384.0" prefWidth="450.0">
                              <items>
                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="370.0" prefWidth="234.0">
                                     <children>
@@ -201,7 +192,7 @@
                                        </Pane>
                                     </children>
                                  </AnchorPane>
-                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="38.0">
+                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="382.0" prefWidth="178.0">
                                     <children>
                                        <Label fx:id="leftBtn" alignment="CENTER" blendMode="GREEN" graphicTextGap="5.0" layoutX="7.0" layoutY="301.0" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#handleButtonAction" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: #f5f5dc; -fx-border-width: 1; -fx-border-color: black; -fx-border-radius: 25%;" styleClass="case" textOverrun="CLIP">
                                           <font>
