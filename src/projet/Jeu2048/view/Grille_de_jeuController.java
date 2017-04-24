@@ -140,6 +140,7 @@ public class Grille_de_jeuController implements Initializable {
     
      public void setMainApp(Fenetre2048 mainApp) {
         this.mainApp = mainApp;
+        if(mainApp.getPrimaryStage().getTitle().equals("2048")){
         int k=0;
         for(int j=0;j>-4;j--){
             p = new Pane();
@@ -174,7 +175,7 @@ public class Grille_de_jeuController implements Initializable {
             k+=1;
             }
         
-        
+     }
     }
      
     @FXML 
@@ -345,7 +346,9 @@ public class Grille_de_jeuController implements Initializable {
             k+=1;
             
             }
-        
+        resultat = new Label();
+        scoreFinish = new Label();
+        //paneFinish = new Pane();
         //myPane.setVisible(true);
         score.setText(""+mainApp.getMaGrille().getScore());
         //mainApp.getMaGrille().setValeurMax(2048); // test écran de fin
@@ -355,14 +358,22 @@ public class Grille_de_jeuController implements Initializable {
              FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Fenetre2048.class.getResource("view/finishPanel.fxml"));
             Pane personOverview = (Pane) loader.load();
-            mainApp.getBorderPane().setCenter(personOverview);
+            Scene scene = new Scene(personOverview);
+            mainApp.getPrimaryStage().setScene(scene);
+            mainApp.getPrimaryStage().setTitle("Final");
+            mainApp.getPrimaryStage().show();
+            Grille_de_jeuController controller = loader.getController();
+            controller.setMainApp(mainApp);
+            //mainApp.getBorderPane().setCenter(personOverview);
             resultat.setText("Victoire");
             scoreFinish.setText(""+mainApp.getMaGrille().getScore());
+            //paneFinish.getChildren().add(resultat);
+            //paneFinish.getChildren().add(scoreFinish);
             scoreFinish.setVisible(true);
             resultat.setVisible(true);
             
             
-            //mainApp.showOverview();
+            mainApp.showOverview();
         }else if(mainApp.getMaGrille().partieFinie()){
             
              FXMLLoader loader = new FXMLLoader();
@@ -373,7 +384,7 @@ public class Grille_de_jeuController implements Initializable {
             resultat.setText("Défaite");
             scoreFinish.setVisible(true);
             resultat.setVisible(true);
-            //mainApp.showOverview();
+            mainApp.showOverview();
         }
     }
     
