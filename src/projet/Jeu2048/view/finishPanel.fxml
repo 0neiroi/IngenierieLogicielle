@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" fx:id="paneFinish" prefHeight="417.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projet.Jeu2048.view.Grille_de_jeuController">
+   <children>
+      <Label layoutX="176.0" layoutY="100.0" text="Partie terminée" />
+      <Label fx:id="resultat" layoutX="203.0" layoutY="138.0" text="Label" />
+      <Label layoutX="148.0" layoutY="168.0" text="Score :" />
+      <Label fx:id="scoreFinish" layoutX="257.0" layoutY="168.0" prefHeight="17.0" prefWidth="46.0" text="0" />
+      <Label fx:id="retry" layoutX="152.0" layoutY="242.0" onMousePressed="#pressMouse" text="Rejoué" />
+      <Label fx:id="quit" layoutX="243.0" layoutY="242.0" onMousePressed="#pressMouse" text="Quitter" />
+   </children>
+</AnchorPane>

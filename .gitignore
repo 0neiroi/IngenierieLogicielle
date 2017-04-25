@@ -1,9 +1,8 @@
 
-/dist/*
+
 /build/*
 /nbproject/*
 
 /nbproject/private/private.properties
 .netbeans_automatic_build 
 .netbeans_update_resources 
-
