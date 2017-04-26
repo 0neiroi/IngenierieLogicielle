@@ -4,63 +4,57 @@
 \usepackage[francais]{babel}
 \usepackage{graphicx}
 \usepackage{url}
-
 % Title Page
 \title{Rapport du projet 2048}
 \author{Pauline Baudouin, Louis Dénommé et Valère Richier}
-
 \begin{document}
 \maketitle
 \part{Recette informatique}
-  \chapter{Achivements atteints}
-    \section{Jeu solo dans la console}
-      Lors du TP de l'année dernière, Louis et Valère ont déjà finalisé le jeu en solo en suivant les consignes demandées au cours de ce TP.
-      Nous avons donc démarré ce projet avec cet achievement déjà validé. Nous avons choisi de partir du projet de Valère car il était plus complet et déjà testé. 
-      Il a fallu commenté le code qui ne l'était pas ainsi qu'écrire la javadoc des fonctions ou cette dernière manquait. On a alors crée une branche \textit{commit} consacrée 
-      à acceuillir le code de source avec ses nouveaux commentaires.
-      
-    \section{Jeu solo avec une interface graphique}
-      Le deuxième achievement que nous avons accompli est l'intégration d'une interface graphique simple sans animations mais fonctionnelle.
-    \section{Affichage fluide grace aux threads}
-      L'affichage fluide grâce aux thread est la suite du précédent achievement. Nous l'avons également accompli bien que les annimations ne soient pas encore fonctionnelles.
-      L'application reste tout de même fluide.
-    \section{Possibilité de lancer une partie sauvegarder}
-      Nous avons reussi à créer une sauvergarde de l'avancement de la partie en cours grâce à la sérialisation de la grille. il est donc possible de sauvergarder ou de charger une partie via le menu.
-  \chapter{Achivements non terminés}
-    \section{Possibilité de laisser l'IA jouer toute seule}
-      L'algorithme de l'IA était pensé mais nous n'avons pas eu le temps de l'intéger au projet. Nous voulions utilisé une IA qui faisait un parcours avec profondeur
-      limitée de tous les futurs états possible.
-    \section{Possibilité de demander de l'aide à l'IA pour le prochain coup}
-      Pour cet achievement, nous avions prévu de faire tourner l'IA pour un tour avec une profondeur plus profonde que lorsqu'elle aurait tourner par elle même.
-  \chapter{Achivements non traités}
-    \section{Possibilité de consulter son propre classement}
-      Nous sommes aujourd'hui un peu déçu de ne pas avoir consacré plus de temps à l'accomplissement de cet objectif car il nous parait tout de même assez simple et nous voulions nous en occuper en dernier.
-    \section{Jeu multi-joueurs}
-      Pour cet objectif, nous avons hésité entre afficher la grille adverse complète ou simplement afficher la meilleure valeur de l'adversaire. Mais nous n'avons pas avancé assez vite pour 
-      commencer cette partie.
+ \chapter{Achievements atteints}
+   \section{Jeu solo dans la console}
+     Lors du TP de l'année dernière, Louis et Valère ont déjà finalisé le jeu en solo en suivant les consignes demandées au cours de ce TP.
+     Nous avons donc démarré ce projet avec cet achievement déjà validé. Nous avons choisi de partir du projet de Valère car il était plus complet et déjà testé.
+     Il a fallu commenté le code qui ne l'était pas ainsi qu'écrire la javadoc des fonctions ou cette dernière manquait. On a alors créé une branche \textit{commit} consacrée à accueillir le code de source avec ses nouveaux commentaires.
+   \section{Jeu solo avec une interface graphique}
+     Le deuxième achievement que nous avons accompli est l'intégration d'une interface graphique simple sans animations mais fonctionnelle.
+   \section{Affichage fluide grâce aux threads}
+     L'affichage fluide grâce aux thread est la suite du précédent achievement. Nous l'avons également accompli bien que les animations ne soient pas encore fonctionnelles.
+     L'application reste tout de même fluide.
+   \section{Possibilité de lancer une partie sauvegardée}
+     Nous avons réussi à créer une sauvegarde de l'avancement de la partie en cours grâce à la sérialisation de la grille. il est donc possible de sauvegarder ou de charger une partie via le menu.
+ \chapter{Achievements non terminés}
+   \section{Possibilité de laisser l'IA jouer toute seule}
+     L'algorithme de l'IA était pensé mais nous n'avons pas eu le temps de l'intégrer au projet. Nous voulions utiliser une IA qui faisait un parcours avec profondeur limitée de tous les futurs états possible.
+   \section{Possibilité de demander de l'aide à l'IA pour le prochain coup}
+     Pour cet achievement, nous avions prévu de faire tourner l'IA pour un tour avec une profondeur plus profonde que lorsqu'elle aurait tournée par elle même.
+ \chapter{Achievements non traités}
+   \section{Possibilité de consulter son propre classement}
+     Nous sommes aujourd'hui un peu déçu de ne pas avoir consacré plus de temps à l'accomplissement de cet objectif car il nous paraît tout de même assez simple et nous voulions nous en occuper en dernier.
+   \section{Jeu multi-joueurs}
+     Pour cet objectif, nous avons hésité entre afficher la grille adverse complète ou simplement afficher la meilleure valeur de l'adversaire. Mais nous n'avons pas avancé assez vite pour
+     commencer cette partie.
 \part{Gestion de projet}
-  \chapter{Diagrammes UML}
-    Pour les diagrammes UML nous avions commencer par utiliser Modélio mais le logiciel étant payant, nous avons préféré finir les diagrammes avec le site DashBoard. 
-    \section{Diagramme de classe}
-      Voici le diagramme de classe final de notre application.
-      \paragraph{}
-      \includegraphics[width=300]{img/diag_class.png}
-      \newpage
-    \section{Diagramme de cas d'utilisation}
-      Voici le diagramme de cas d'utilisation initial de l'application, ce dernier permet de comprendre quelle volonté nous avions à finalisé ce projet.
-      \paragraph{}
-      \includegraphics[width=300]{img/diag_useCase.png}
-  \chapter{Outils de gestion}
-    \section{Trello}
-      Nous avons choisi d'utiliser le site web Trello afin de savoir qui fait quoi à chaque moment du projet.
-      Malgré tous, nous avons peu à peu abandonner Trello par manque de temps avec les nombreux projets à réaliser.
-      \paragraph{}
-      \includegraphics[width=300]{img/trello.png}
-    \section{Git}
-      Pour le partage de fichier, nous avons préféré Git à SourceForge. Ce dernier nous a donner beaucoup de difficulté car nous devions apprendre à nous en servir.
-      Il s'est tout de même avérer être un outil dont nous ne pourions plus nous passer. Nous aurions tout de même apprécier avoir un cours encadrer sur cet outil.
-      Notre Git peut être trouver à cette adresse : \url{https://github.com/0neiroi/IngenierieLogicielle_Gr2}
+ \chapter{Diagrammes UML}
+   Pour les diagrammes UML nous avions commencé par utiliser Modélio mais le logiciel étant payant, nous avons préféré finir les diagrammes avec le site DashBoard.
+   \section{Diagramme de classe}
+     Voici le diagramme de classe final de notre application.
+     \paragraph{}
+     \includegraphics[width=300]{img/diag_class.png}
+     \newpage
+   \section{Diagramme de cas d'utilisation}
+     Voici le diagramme de cas d'utilisation initial de l'application, ce dernier permet de comprendre quelle volonté nous avions à finaliser ce projet.
+     \paragraph{}
+     \includegraphics[width=300]{img/diag_useCase.png}
+ \chapter{Outils de gestion}
+   \section{Trello}
+     Nous avons choisi d'utiliser le site web Trello afin de savoir qui fait quoi à chaque moment du projet.
+     Malgré tout, nous avons peu à peu abandonner Trello par manque de temps avec les nombreux projets à réaliser.
+     \paragraph{}
+     \includegraphics[width=300]{img/trello.png}
+   \section{Git}
+     Pour le partage de fichier, nous avons préféré Git à SourceForge. Ce dernier nous a donnée beaucoup de difficultés car nous devions apprendre à nous en servir.
+     Il s'est tout de même avéré être un outil dont nous ne pourrions plus nous passer. Nous aurions tout de même apprécier avoir un cours encadré sur cet outil.
+     Notre Git peut être trouver à cette adresse : \url{https://github.com/0neiroi/IngenierieLogicielle_Gr2}
 \part{Documentation}
-  Pour la documentation, nous avons utilisé la javadoc. Vous pourrez la trouver dans le dossier dist/javadoc.
-
+ Pour la documentation, nous avons utilisé la javadoc. Vous pourrez la trouver dans le dossier dist/javadoc.
 \end{document}
